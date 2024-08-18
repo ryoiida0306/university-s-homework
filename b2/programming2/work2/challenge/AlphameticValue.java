@@ -1,0 +1,1 @@
+// AlphameticValueクラスを書く

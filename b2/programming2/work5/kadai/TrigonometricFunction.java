@@ -1,0 +1,1 @@
+// サブクラスTrigonometricFunctionを書く

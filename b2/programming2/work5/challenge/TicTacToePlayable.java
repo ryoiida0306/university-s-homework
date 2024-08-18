@@ -1,0 +1,1 @@
+// インタフェースTicTacToePlayableを書く

@@ -1,0 +1,1 @@
+// サブクラスLinearEquationを書く

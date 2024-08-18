@@ -1,0 +1,1 @@
+// サブクラスQuadraticFunctionを書く

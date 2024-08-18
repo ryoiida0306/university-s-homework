@@ -1,0 +1,1 @@
+// NotNaturalNumberクラスの定義

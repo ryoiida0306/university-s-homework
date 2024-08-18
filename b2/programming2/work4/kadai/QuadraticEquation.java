@@ -1,0 +1,1 @@
+// サブクラスQuadraticEquationを書く

@@ -1,0 +1,1 @@
+// VariableBaseValueクラスを書く

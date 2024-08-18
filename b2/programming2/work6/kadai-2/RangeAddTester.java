@@ -1,0 +1,1 @@
+// RangeAddTester クラス

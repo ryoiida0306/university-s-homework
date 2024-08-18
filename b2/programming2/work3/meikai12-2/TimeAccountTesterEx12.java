@@ -1,0 +1,1 @@
+// mainメソッドを含むTimeAccountTesterEx12クラスを書く

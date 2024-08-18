@@ -1,0 +1,1 @@
+// インタフェースDifferentiableを書く

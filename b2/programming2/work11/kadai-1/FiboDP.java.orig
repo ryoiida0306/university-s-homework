@@ -1,0 +1,25 @@
+// フィボナッチ数を求めるプログラム（動的計画法版）
+public class FiboDP{
+    public static long[] fib;
+    public static void main(String[] args){
+        long startTime = System.nanoTime();
+        fib = new long[60];
+        fib[1]=1;
+        fib[2]=1;//fib[0]は捨てる
+        for(int i =1;i<=Integer.parseInt(args[0]);i++){
+            Fib(i);
+            // System.out.println("fib["+i+"]="+fib[i]);
+        }
+        System.out.println(fib[Integer.parseInt(args[0])]);
+        System.out.println("実行時間:"+(System.nanoTime()-startTime));
+
+    }
+
+    public static void Fib(int n){
+        // if(n == 1||n == 2){return 1;}
+        if(!(n==1||n==2))
+        fib[n]=fib[n-1]+fib[n-2];
+        
+
+    }
+}

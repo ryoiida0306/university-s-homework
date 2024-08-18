@@ -1,0 +1,1 @@
+// サブクラスTrigonometricEquationを書く

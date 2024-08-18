@@ -1,0 +1,18 @@
+JAVAC	= javac
+JAVA	= java
+SRC	= $(wildcard *.java)
+CLASS	= $(SRC:.java=.class)
+MAIN	= makeTest
+
+build:	$(CLASS)
+
+test:	$(CLASS)
+	$(JAVA) $(MAIN)
+
+.java.class:
+	$(JAVAC) $<
+
+clean:;	\rm -f *.class
+
+.SUFFIXES: .java .class
+
