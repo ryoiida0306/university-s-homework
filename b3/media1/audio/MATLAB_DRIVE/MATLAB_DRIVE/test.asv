@@ -1,0 +1,5 @@
+fs=1;
+[x,fs] = audioread("msksda06.wav");
+plot(x)
+freqz(x,[2 -2*sqrt(3) 2])
+freqz(x)

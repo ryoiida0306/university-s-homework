@@ -1,0 +1,20 @@
+fid = fopen('boin.raw','r');
+x = fread(fid,'int16');
+plot(x)
+
+L = length(x);
+
+N = 1;
+
+z = zeros(L,1);
+
+
+for t=N+1:L
+    for n = 1:N
+        z(t) = z(t)+x(t-n);
+    end
+    z(t) = z(t)/N;
+end
+
+plot(z)
+soundsc(z,16000)

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Ranking</title>
+    <link rel="stylesheet" href="style.css">
+    <script src=./right_output.js></script>
+    <script src=rank.js></script>
+</head>
+
+<body>
+
+    <canvas id="sample1">
+        <!-- 図形を表示するには、canvasタグをサポートしたブラウザが必要です。 -->
+        <script>
+            const url = new URL(window.location.href);
+            const params = url.searchParams;
+            const diff1 = params.get("diff1");
+            const diff2 = params.get("diff2");
+            const diff3 = params.get("diff3");
+            setdiff("adai", diff1);
+            setdiff("asai", diff2);
+            setdiff("ando", diff3);
+            var canvas = document.getElementById('sample1');
+            if (canvas.getContext) {
+
+                var context = canvas.getContext('2d');
+
+
+                context.strokeStyle = 'rgb(00,00,00)'; //枠線の色は青
+                context.fillStyle = 'rgb(0,255,0)'; //塗りつぶしの色は赤
+
+
+                var max_height = 0.75;//枠組みの中での一位の高さの割合
+                var window_height = 150;
+                console.log("dsssssdddddd")
+                var diff_1 = diff(name_from_rank(1));
+                var diff_2 = diff(name_from_rank(2));
+                var diff_3 = diff(name_from_rank(3));
+
+
+                var first_height = diff_1 / diff_1 * max_height * window_height;
+                var second_height = diff_2 / diff_1 * max_height * window_height;
+                var thred_height = diff_3 / diff_1 * max_height * window_height;
+
+
+                //左から20上から40の位置に、幅50高さ100の四角形を描く
+                // context.fillRect(120,40,50,100);
+
+                //1位
+                context.fillRect(125, 150 - first_height, 50, first_height);
+                context.strokeRect(125, 150 - first_height, 50, first_height);
+                //2位
+                context.fillRect(75, 150 - second_height, 50, second_height);
+                context.strokeRect(75, 150 - second_height, 50, second_height);
+                //3位
+                context.fillRect(175, 150 - thred_height, 50, thred_height);
+                context.strokeRect(175, 150 - thred_height, 50, thred_height);
+
+                context.fillStyle = 'rgb(0,0,0)'; //塗りつぶしの色は赤
+                context.fillText("1位", 140, 150 - first_height + 15);
+                context.fillText(diff(name_from_rank(1)), 140, 150 - first_height + 25);
+                context.fillText(eng_to_jp(name_from_rank(1)), 140, 150 - first_height - 5);
+                context.fillText("2位", 90, 150 - second_height + 15);
+                context.fillText(diff(name_from_rank(2)), 90, 150 - second_height + 25);
+                context.fillText(eng_to_jp(name_from_rank(2)), 90, 150 - second_height - 5);
+                context.fillText("3位", 190, 150 - thred_height + 15);
+                context.fillText(diff(name_from_rank(3)), 190, 150 - thred_height + 25);
+                context.fillText(eng_to_jp(name_from_rank(3)), 190, 150 - thred_height - 5);
+
+                //左から200上から80の位置に、幅100高さ50の四角の枠線を描く
+                // context.strokeRect(200,80,100,50);
+
+                //左から150上から75の位置に、半径60の半円を反時計回り（左回り）で描く
+                // context.arc(150,75,60,Math.PI*1,Math.PI*2,true);
+                context.fill();
+
+            }
+        </script>
+    </canvas>
+    <p id=first>1位:</p>
+    <script>
+        document.write("<p>" + eng_to_jp(name_from_rank(1)) + "</p>");
+        document.write("<p>" + mes_from_rank(1) + "</p>")
+    </script>
+    <p>2位:</p>
+    <script>
+        document.write("<p>" + eng_to_jp(name_from_rank(2)) + "</p>");
+        document.write("<p>" + mes_from_rank(2) + "</p>")
+    </script>
+    <p>3位:</p>
+    <script>
+        document.write("<p>" + eng_to_jp(name_from_rank(3)) + "</p>");
+        document.write("<p>" + mes_from_rank(3) + "</p>")
+    </script>
+
+
+</body>
+
+</html>

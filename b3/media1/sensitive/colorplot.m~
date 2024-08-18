@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Settings of plot in Matlab
+% This code was written by Tatsuya Yokota (2019.04.12)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear all;
+close all;
+
+%描画用関数，統計用関数を含むディレクトリを読み込む
+addpath('plotting_function');
+addpath('statistical_function');
+
+%%%色プロット%%%
+y_names = {'aaa', 'bbb', 'ccc' ,'ddd', 'eee'};
+x_names = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+
+R = rand(5,7);
+
+figure(1);clf;
+imagesc(R);
+t = text(3,4,'*','horizontalalignment','center','fontsize',15); %有意性あり
+t = text(7,2,'**','horizontalalignment','center','fontsize',15); %有意性あり
+colorbar;caxis([0 1]);
+Xaxis_string(1:7,x_names,10,12);%文字列を置く位置，置く文字列のセル，角度，文字サイズ
+Yaxis_string(1:5,y_names,12);%文字列を置く位置，置く文字列のセル，文字サイズ
+title('* : p<0.05, ** : p<0.01')
+

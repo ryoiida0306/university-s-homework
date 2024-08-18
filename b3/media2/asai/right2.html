@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Right1</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="me.css">
+  <script src=../context.js></script>
+
+
+
+
+
+</head>
+
+<body>
+  <div>
+    <div>
+      <textarea id="text" cols="30" rows="10"></textarea>
+      <button id="send">送信</button>
+
+    </div>
+    <div id="output">
+      <button id="toBottom">最下部へ移動</button>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved, get, child, update, onValue } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0CDASi67f4-q-pPBpK-tQfs3HsG61D5Q",
+      authDomain: "sample-d77a5.firebaseapp.com",
+      projectId: "sample-d77a5",
+      storageBucket: "sample-d77a5.appspot.com",
+      messagingSenderId: "417560142096",
+      appId: "1:417560142096:web:a50600e7d827a9c09a4595"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app); //RealtimeDBに接続
+    const Me = "asai";
+    const You = "iida";
+    const MeAndYou = "asai_iida";
+    var name = "浅井";
+    const pathFor = "time/" + Me + "/" + You;
+    const pathMe = "chat/" + MeAndYou + "/" + You;
+    const pathMeName = You
+    const pathChat = "chat/" + MeAndYou;
+    const pathRank = "rank/" + You;
+    const dbRef = ref(db, pathChat); //RealtimeDB内の"chat"を使う
+    const dbTimFor = ref(db, pathFor);
+    const dbTim = ref(db, pathMe);
+    const dbRank = ref(db, pathRank);
+    var maekidoku = new Boolean(0);
+    var kidokukey = 0;
+    let unread = 0;
+    let last_time = 0;
+    let diff = 0;
+    var cale_flag = 1;
+    const API_KEY = 'AIzaSyDZirJB29fglkZX5QNWsZ83uffKa4GWky4';
+    const CALENDAR_ID = 'bis45562@gmail.com';
+
+    window.addEventListener('DOMContentLoaded', function () {
+      // １時間ごとに実行
+      setInterval(() => {
+        cale_flag = 1;
+      }, 3600000);
+    });
+
+    get(child(ref(db), pathMe)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const kidokuKeyData = snapshot.val();
+        kidokukey = kidokuKeyData.readdone;
+        console.log("kidokukey73" + kidokukey);
+      } else {
+        console.log("kidokukey No data available");
+        set(dbTim, {
+          readdone: 0
+        });
+        kidokukey = 0;
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    get(child(ref(db), pathFor)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const timeForData = snapshot.val();
+        last_time = new Date(timeForData.lasttime);
+      } else {
+        set(dbTimFor, {
+          read: 0,
+          lasttime: 0
+        });
+        unread = 0;
+        last_time = 0;
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    get(child(ref(db), pathRank)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const timeData = snapshot.val();
+        diff = timeData.diff;
+      } else {
+        set(dbRank, {
+          diff: 0
+        });
+        console.log("Rank No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    //データ登録(Click)
+    $("#send").on("click", function () {
+      const msg = {
+        uname: name,
+        text: $("#text").val(),
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        date: new Date().getDate(),
+        hour: new Date().getHours(),
+        minute: new Date().getMinutes(),
+        second: new Date().getSeconds()
+      }
+
+      if (cale_flag == 1) {
+        function start() {
+          gapi.client.init({
+            'apiKey': API_KEY,
+          }).then(function () {
+            return gapi.client.request({
+              'path': 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID) + '/events'
+            })
+          }).then(function (response) {
+
+            let items = response.result.items;
+            for (let i = 0; i < items.length; i++) {
+              if (items[i].start.dateTime != undefined && items[i].end.dateTime != undefined) {
+                var date = parseInt(items[i].start.dateTime.substring(8, 10));
+                if (date == msg.date) {
+                  var month = parseInt(items[i].start.dateTime.substring(5, 7));
+                  if (month == msg.month) {
+                    var year = parseInt(items[i].start.dateTime.substring(0, 4));
+                    if (year == msg.year) {
+                      var stHoAndMi = 60 * parseInt(items[i].start.dateTime.substring(11, 13)) + parseInt(items[i].start.dateTime.substring(14, 16));
+                      var edHoAndMi = 60 * parseInt(items[i].end.dateTime.substring(11, 13)) + parseInt(items[i].end.dateTime.substring(14, 16));
+                      var nowHoAndMi = 60 * msg.hour + msg.minute;
+                      if (stHoAndMi <= nowHoAndMi && nowHoAndMi <= edHoAndMi) {
+                        let h = '<p>';
+                        h += "現在取り込み中です。"
+                        h += '<br>';
+                        h += items[i].end.dateTime.substring(11, 13) + "時まで返信できません。"
+                        h += '</p>';
+                        $("#output").append(h);
+                        cale_flag = 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }, function (reason) {
+            console.log('Error: ' + reason.result.error.message);
+          });
+        };
+
+        gapi.load('client', start);
+      }
+      const newPostRef = push(dbRef); //ユニークKEYを生成
+      set(newPostRef, msg);           //"chat"にユニークKEYをつけてオブジェクトデータを登録
+      document.getElementById("text").value = "";
+    });
+
+    //データ登録(Enter)
+    $("#text").on("keydown", function (e) {
+      console.log(e);        //e変数の中身を確認！！
+      if (e.keyCode == 13 && document.getElementById("text").value != "") {   //EnterKey=13
+        const msg = {
+          uname: name,
+          text: $("#text").val(),
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
+          date: new Date().getDate(),
+          hour: new Date().getHours(),
+          minute: new Date().getMinutes(),
+          second: new Date().getSeconds()
+        }
+
+        if (cale_flag == 1) {
+          function start() {
+            gapi.client.init({
+              'apiKey': API_KEY,
+            }).then(function () {
+              return gapi.client.request({
+                'path': 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(CALENDAR_ID) + '/events'
+              })
+            }).then(function (response) {
+
+              let items = response.result.items;
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].start.dateTime != undefined && items[i].end.dateTime != undefined) {
+                  var date = parseInt(items[i].start.dateTime.substring(8, 10));
+                  if (date == msg.date) {
+                    var month = parseInt(items[i].start.dateTime.substring(5, 7));
+                    if (month == msg.month) {
+                      var year = parseInt(items[i].start.dateTime.substring(0, 4));
+                      if (year == msg.year) {
+                        var stHoAndMi = 60 * parseInt(items[i].start.dateTime.substring(11, 13)) + parseInt(items[i].start.dateTime.substring(14, 16));
+                        var edHoAndMi = 60 * parseInt(items[i].end.dateTime.substring(11, 13)) + parseInt(items[i].end.dateTime.substring(14, 16));
+                        var nowHoAndMi = 60 * msg.hour + msg.minute;
+                        if (stHoAndMi <= nowHoAndMi && nowHoAndMi <= edHoAndMi) {
+                          let h = '<p>';
+                          h += "現在取り込み中です。"
+                          h += '<br>';
+                          h += items[i].end.dateTime.substring(11, 13) + "時まで返信できません。"
+                          h += '</p>';
+                          $("#output").append(h);
+                          cale_flag = 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }, function (reason) {
+              console.log('Error: ' + reason.result.error.message);
+            });
+          };
+
+          gapi.load('client', start);
+        }
+        const newPostRef = push(dbRef); //ユニークKEYを生成
+        set(newPostRef, msg);           //"chat"にユニークKEYをつけてオブジェクトデータを登録
+        document.getElementById("text").value = "";
+
+      }
+    });
+
+    //最下部に移動
+    $("#toBottom").on("click", function () {
+      var element = document.getElementById('output'); // 移動させたい位置の要素を取得
+      var rect = element.getBoundingClientRect();
+      var position = rect.bottom;    // 一番上からの位置を取得
+      scrollBy(10, position);
+      $("#output").append(position);
+    });
+
+    //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+    onChildAdded(dbRef, function (data) {
+      console.log("kidokukey:" + kidokukey);
+
+      const msg = data.val();    //オブジェクトデータを取得し、変数msgに代入
+      const key = data.key;      //データのユニークキー（削除や更新に使用可能）
+      let nowtime = new Date();
+      var flag = 0;
+      //既読したキーが入っている，キーを表示させないように(例：chat/ando_asai/ando)
+      if (key != "ando" && key != "asai" && key != "iida") {
+        //keyと前回既読したメッセージのkeyが同じならmaekidokuを1に
+        if (key == kidokukey) {
+          maekidoku = 1;
+        }
+
+        if (msg.text != "既読" && msg.text != "既読処理済み") {
+          let h = context_function(data, name);
+          if (msg.uname == name) {
+            unread = unread + 1;
+            console.log("unread1" + unread);
+            if (kidokukey == 0 || maekidoku == 1) {
+              if (last_time == 0) {
+                console.log("インクリメント前unread" + unread);
+                console.log("インクリメントunread" + unread);
+                update(dbTimFor, {
+
+                  //未読数をインクリメント
+                  "read": unread,
+                  //今の時間を代入
+                  "lasttime": nowtime
+
+                });
+                last_time = nowtime;
+                console.log("unread2" + unread);
+              } else {
+                update(dbTimFor, {
+
+                  //未読数をインクリメント
+                  "read": unread,
+                  //時間は変更しない
+                  "lasttime": last_time
+
+                });
+                console.log("unread3" + unread);
+              }
+            }
+
+          } else {
+            if (kidokukey == 0 || maekidoku == 1) {
+              flag = 1;
+              set(dbTim, {
+                readdone: key
+              });
+            }
+          }
+
+          $("#output").append(h); //#outputの最後に追加
+
+          if (flag == 1) {
+            const msg = {
+              text: "既読",
+              uname: name,
+              year: new Date().getFullYear(),
+              month: new Date().getMonth() + 1,
+              date: new Date().getDate(),
+              hour: new Date().getHours(),
+              minute: new Date().getMinutes(),
+              second: new Date().getSeconds()
+            }
+            //ユニークKEYを生成
+            const newPostRef = push(dbRef);
+            flag = 0;
+            set(newPostRef, msg);
+          }
+        } else {
+          if (msg.text != "既読処理済み") {
+            if (msg.uname != name) {
+              console.log("こっちは入っとるんか？")
+              console.log("last_time" + last_time);
+              if (last_time != 0) {
+                console.log("入ってるよー")
+                //未読と既読の差をミリ秒（単位）でdiffに代入
+                let difftime = nowtime.getTime() - last_time.getTime();
+                console.log("diff is negative" + difftime);
+                update(ref(db, pathRank), {
+
+                  "diff": diff + difftime
+
+                });
+                diff = diff + difftime;
+                unread = 0;
+                last_time = 0;
+                update(dbTimFor, {
+                  //未読を初期化
+                  "read": unread,
+                  //最初の未読時間を初期化
+                  "lasttime": last_time
+                });
+              }
+
+
+              $(".midoku").each(function () {
+                var text = $(this).html();
+                $(this).html(text.replace("未読", "既読"));
+              });
+
+              //既読までのデータパス
+              var datapath = pathChat + "/" + key;
+              //既読を既読処理済みに
+              update(ref(db, datapath), {
+                text: "既読処理済み"
+              });
+            }
+          }
+        }
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

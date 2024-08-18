@@ -1,0 +1,11 @@
+#
+#DAStudio Preference File
+#
+
+
+[GLUEEditorPreferences]
+SuggestActionsSearchNotification=0
+
+[General]
+MatlabRelease=2022a
+

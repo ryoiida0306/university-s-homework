@@ -1,0 +1,53 @@
+import java.util.Objects;
+
+class State {
+    State parent;
+    Action action;
+    World world;
+    int cost;
+
+    State(World world){
+        this.parent = null;
+        this.world = world;
+        this.cost = 0;
+    }
+
+    State(State parent, Action action, World nextWorld){
+        this.parent = parent;
+        this.action = action;
+        this.world = nextWorld;
+        this.cost = action.cost() + parent.cost;
+    }
+
+    public int hashCode(){
+        return Objects.hash(action, cost, parent, world);
+    }
+
+    public boolean equals(Object obj){
+        if(obj instanceof State){
+            State other = (State)obj;
+            return this.world.equals(other.world);
+        }
+        return false;
+    }
+
+    public String toString(){
+        return this.world.toString() + "@" + cost;
+    }
+
+    boolean isGoal(){
+        return this.world.isGoal();
+    }
+
+    int f(){
+        return this.g() + this.h();
+    }
+    
+    int g(){
+        return this.cost;
+    }
+
+    int h(){
+        return this.world.estimate();
+    }
+}

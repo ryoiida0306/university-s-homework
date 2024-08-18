@@ -1,0 +1,103 @@
+  .base {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+  }
+  .class1 {
+    width: 30%;
+    overflow: scroll;
+    background :hsl(135, 100%, 67%);
+
+  }
+   
+  .class2 {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    background:hsl(135, 100%, 67%);
+
+    font-family: cursive;
+  }
+
+  input {
+    width: 100%;
+    height: 50px;
+    background :hsl(135, 100%, 67%);
+    border-radius: 10;
+    font-family: cursive;
+  }
+
+  input:active{
+    background :hsl(135, 100%, 52%);
+    color: hsl(184, 100%, 20%);
+  }
+
+  textarea {
+    position: absolute;
+    bottom : 0;
+    width :100%;
+    
+  }
+
+  button#send {
+    position: absolute;
+    bottom : 0;
+  }
+  input#toBottom{
+    width: 30%;
+    height: 5%;
+    background-color: #c300ff;
+    color : rgb(0, 0, 0);
+    position : absolute;
+    bottom : 17%;
+    
+  }
+
+  div#output{
+    word-break : break-all;
+    height : 620px;
+    overflow : auto;
+  }
+
+  div[id ^=uname_] {
+    text-align: right;
+  }
+
+
+  div[id ^=text_] {
+    background-color : hsl(121, 100%, 87%);
+    border-radius: 0px 10px 10px 10px;
+    max-width : 60%;
+    width:fit-content;
+    /* text-align: right; */
+    margin : 0 auto 0 0;
+  }
+
+  div[id ^=DayTime_] {
+    text-align: left; 
+    margin : 0 auto 0 0;
+    
+  }
+
+  .midoku{
+    white-space: nowrap;
+    text-align: right; 
+    font-size: small;
+  }
+
+
+  canvas{
+    background-color: rgb(211, 248, 205);
+    width: 75%;
+    height: 50%;
+  }
+
+  table {
+    position: absolute;
+    bottom: 23.5%;
+  }
+
+  button#ok{
+    height: 1.95em;
+  }

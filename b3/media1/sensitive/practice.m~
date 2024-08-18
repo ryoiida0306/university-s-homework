@@ -1,0 +1,7 @@
+clear all;
+close all;
+
+load('practice.mat');
+addpath('plotting_function');
+addpath('statistical_function');
+

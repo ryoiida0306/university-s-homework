@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Ranking</title>
+    <link rel="stylesheet" href="style.css">
+    <script src=./right_output.js></script>
+    <script src=rank.js></script>
+    <div id="diff1">
+        <p hidden>0</p>
+    </div>
+    <div id="diff2">
+        <p hidden>0</p>
+    </div>
+    <div id="diff3">
+        <p hidden>0</p>
+    </div>
+</head>
+
+<body>
+    <button id="myclick">発表</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="module">
+        let diff1;
+        let diff2;
+        let diff3;
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved, get, child, update, onValue, onChildChanged } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD0CDASi67f4-q-pPBpK-tQfs3HsG61D5Q",
+            authDomain: "sample-d77a5.firebaseapp.com",
+            projectId: "sample-d77a5",
+            storageBucket: "sample-d77a5.appspot.com",
+            messagingSenderId: "417560142096",
+            appId: "1:417560142096:web:a50600e7d827a9c09a4595"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const path1 = "rank/asai";
+        console.log("ddddddd")
+        get(child(ref(db), path1)).then((snapshot) => {
+            if (snapshot.exists()) {
+                const Data1 = snapshot.val();
+                diff1 = Data1.diff;
+                console.log("aaad")
+                setdiff(name_from_rank(1), diff1);
+                console.log("www" + diff1);
+            } else {
+                console.log("read1取れんかった");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        const path2 = "rank/ando";
+        get(child(ref(db), path2)).then((snapshot) => {
+            if (snapshot.exists()) {
+                const Data2 = snapshot.val();
+                diff2 = Data2.diff;
+                let my2 = document.getElementById("diff2");
+                my2.innerHTML = "<p hidden>" + diff2 + "</p>";
+            } else {
+                console.log("read1取れんかった");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        const path3 = "rank/iida";
+        get(child(ref(db), path3)).then((snapshot) => {
+            if (snapshot.exists()) {
+                const Data3 = snapshot.val();
+                diff3 = Data3.diff;
+                let my3 = document.getElementById("diff3");
+                my3.innerHTML = "<p hidden>" + diff3 + "</p>";
+            } else {
+                console.log("read1取れんかった");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+
+        console.log("dsssssddddddddddddddddd")
+        $("#myclick").on("click", function() {
+            console.log("clickdiff1"+ diff1);
+            console.log(diff2);
+            console.log(diff3);
+            const myUrl = "ranking.html?diff1=" + diff1 + "&diff2=" + diff2 + "&diff3=" + diff3;
+            window.location.href = myUrl;
+        });
+    </script>
+</body>
+
+</html>
