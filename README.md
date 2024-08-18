@@ -1,2 +1,2 @@
-# university-s-homework
+# university's-homework
 大学の課題
