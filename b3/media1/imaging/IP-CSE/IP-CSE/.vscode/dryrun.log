@@ -1,0 +1,7 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: �f�B���N�g�� `c:/Users/iida ryo/Desktop/���H�����/�O�N���O��/���f�B�A�n���K1/�摜��񏈗�/IP-CSE/IP-CSE' �ɓ���܂�
+ 
+make.exe: �f�B���N�g�� `c:/Users/iida ryo/Desktop/���H�����/�O�N���O��/���f�B�A�n���K1/�摜��񏈗�/IP-CSE/IP-CSE' ����o�܂�
+ 
+make.exe: *** �^�[�Q�b�g���w�肳��Ă��炸, makefile ��������܂���.  ���~.
+

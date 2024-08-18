@@ -1,0 +1,6 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: �f�B���N�g�� `c:/Users/iida ryo/Desktop/���H�����/�O�N���O��/���f�B�A�n���K1/�摜��񏈗�/IP-CSE/IP-CSE/tex' �ɓ���܂�
+platex main
+dvipdfmx main.dvi
+make.exe: �f�B���N�g�� `c:/Users/iida ryo/Desktop/���H�����/�O�N���O��/���f�B�A�n���K1/�摜��񏈗�/IP-CSE/IP-CSE/tex' ����o�܂�
+ 
