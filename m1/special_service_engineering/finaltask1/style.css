@@ -1,0 +1,19 @@
+
+/* .footer-image{
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+
+} */
+
+div.background{
+  background-color: #f0f0f0;
+}
+
+.alert-warning{
+  position: absolute;
+  background-color: black;
+  color : white;
+}

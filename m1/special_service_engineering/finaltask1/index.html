@@ -1,0 +1,240 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="carousel.css">
+<link rel="stylesheet" type="text/css" href="navbars.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<div class="background">
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">名古屋工業大学非公式サイト</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form role="search">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+        </div>
+    </nav>
+
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="bd-placeholder-img" width="100%" height="100%" src="https://upload.wikimedia.org/wikipedia/commons/a/aa/View_of_Nagoya_Institute_of_Technology_Entrance%2C_Tsurumai_Showa_Ward_Nagoya_2021.jpg">
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1 style="color: rgb(171, 187, 52)">Nagoya Institute of Technology</h1>
+              <p class="opacity-75">subtitle of Nagoya Institute of Technology</p>
+              <p><a class="btn btn-lg btn-primary" href="https://www.nitech.ac.jp/">home page of this university</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p>Some representative placeholder content for the second slide of the carousel.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1>One more for good measure.</h1>
+              <p>Some representative placeholder content for the third slide of this carousel.</p>
+              <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        ここは名古屋工業大学の<span style="color: red; font-size: 30px; font-weight: bold;">非公式</span>ウェブサイトです。
+      </div>
+    </div>
+    <div class="container">
+    <h1 style="text-align: center;">学部・学科紹介</h1>
+    <h4>工学部第一部高度教育課程</h4>
+    <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        電気・電子工学科
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        電気電子工学科は、電気・電子工学の基礎から応用までを学び、情報通信技術やエネルギー技術など、社会に求められる幅広い知識と技術を身につけることができます。
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        生命・応用化学科
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        生命・応用化学科は、化学の基礎から応用までを学び、環境問題やエネルギー問題など、社会に求められる幅広い知識と技術を身につけることができます。
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        情報工学科
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        情報工学科は、情報処理技術や情報通信技術など、情報技術の基礎から応用までを学び、社会に求められる幅広い知識と技術を身につけることができます。
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        物理工学科
+      </button>
+    </h2>
+    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        物理工学科は、物理学の基礎から応用までを学び、エネルギー技術や材料技術など、社会に求められる幅広い知識と技術を身につけることができます。
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        社会工学科
+      </button>
+    </h2>
+    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        社会行工学科は、社会システムの設計や運用など、社会に求められる幅広い知識と技術を身につけることができます。
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    <div class="container">
+    <div class="card mb-3">
+      <div class="card-header">
+          工学部第一部創造教育課程
+      </div>
+      <div class="card-body">
+          <p class="card-text">工学部第一部創造教育課程は、工学部第一部高度教育課程と並行して、プログラミングやデザインなど、幅広い知識と技術を身につけることができます。</p>
+      </div>
+  </div>
+  </div>
+
+  <div class="container">
+  <div class="card mb-3">
+      <div class="card-header">
+          工学部第二部
+      </div>
+      <div class="card-body">
+          <p class="card-text">工学部第二部は、工学部第一部高度教育課程と並行して、幅広い知識と技術を身につけることができます。</p>
+      </div>
+  </div>
+  </div>
+
+  <div class="card mb-3">
+      <div class="card-header">
+          名古屋工業大学の歴史
+      </div>
+      <div class="card-body">
+          <p class="card-text">名古屋工業大学の歴史は、1905年(明治38年)に前身である名古屋高等工業学校が設置されたことから始まります。当時、国内には工業発展の機運が高まりつつあり、工業教育を受けた人材が必要となっていました。そこで、既設の東京、大阪、京都に次ぎ、第4の高等工業学校として、愛知県に初めての官立高等教育機関が誕生しました。</p>
+          <p class="card-text"><span style="font-weight: bold"><a href="https://ja.wikipedia.org/wiki/%E7%89%A7%E9%87%8E%E4%BC%B8%E9%A1%95">牧野伸顕文部大臣</a></span>(当時)は、開学に際して、「当地が経済上の中心として勢力を得るには、教育ある人物を実業界において用いなければならない。(中略)当地が単に尾張の名古屋たるに留まらず、進んで日本の名古屋となり、さらに一歩を進めて世界の名古屋たるべく発達することを望む。」との言葉を残しており、名古屋高等工業学校及び陶器、紡績、織物といった当時の主要産業が芽生え始めている中京地域に強い期待があったことが窺えます。</p>
+      </div>
+  </div>
+    <div class="container">
+    <h2>名古屋工業大学のキャンパス</h2>
+      <img src="https://www.nitech.ac.jp/access/imgs/img_map_01_240301.jpg" alt="名古屋工業大学のキャンパス" width="80%" class="img-fluid" style="max-width: 60%;" >
+    </div>
+    <div class="container">
+    <h2>アクセス</h2>
+        <div id="mapid" style="width:100%;height:500px"></div>
+    </div>
+<script>
+var mymap = L.map('mapid').setView([35.158, 136.924], 16);
+L.tileLayer(
+'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+).addTo(mymap);
+L.marker([35.157, 136.925]).addTo(mymap)
+.bindPopup('名古屋工業大学')
+L.marker([35.156,136.917]).addTo(mymap)
+.bindPopup('鶴舞駅から徒歩10分')
+.openPopup();
+
+
+</script>
+<br />
+<div class="container">
+  <h2>お問い合わせ</h2>
+  <form>
+      <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="example@nitech.ac.jp">
+          <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+    <img src="https://www.nitech.ac.jp/imgs/base/bg_body_illust.gif" alt="名古屋工業大学" class="footer-image">
+</div>
+
+
+</body>
+</html>

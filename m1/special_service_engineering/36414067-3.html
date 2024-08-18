@@ -1,0 +1,47 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-
+20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+<div id="mapid" style="width:100%;height:500px"></div>
+<script>
+var mymap = L.map('mapid').setView([35.158, 136.924], 16);
+var university = L.marker([35.158, 136.924]).addTo(mymap);
+university.bindPopup("Nagoya Institute of Technology").openPopup();
+var nagoya_castle = L.marker([35.184875, 136.899755]).addTo(mymap);
+nagoya_castle.bindPopup("Nagoya Castle").openPopup();
+var nagoya_station = L.marker([35.170651, 136.881757]).addTo(mymap);
+nagoya_station.bindPopup("Nagoya Station").openPopup();
+// var brasila = L.marker([-15.7942287, -47.8821658]).addTo(mymap);
+// brasila.bindPopup("<b>Oh! it's Brasila !!!!!!</b>").openPopup();
+var circle = L.circle([35.158, 136.924], {
+color: 'navy',
+fillColor: '#1f1e33',
+fillOpacity: 0.5,
+radius: 500
+}).addTo(mymap);
+circle.bindPopup("The circle of Nagoya Institute of Technology");
+var polygon = L.polygon([
+[35.158, 136.924],
+[35.184875, 136.899755],
+[35.170651, 136.881757]
+], {
+color: 'red',
+fillColor: '#f03',
+fillOpacity: 0.5
+}
+).addTo(mymap);
+polygon.bindPopup("The polygon of Nagoya Institute of Technology");
+function onMapClick(e) {
+alert("You clicked the map at " + e.latlng);
+}
+mymap.on('click', onMapClick);
+L.tileLayer(
+'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+).addTo(mymap);
+</script>
+</body>
+</html>
